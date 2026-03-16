@@ -153,7 +153,7 @@ export default function App(){const[mode,setMode]=useState(null);const[at,setAt]
         <div style={{padding:"8px 12px",background:"rgba(0,0,0,0.12)",borderRadius:6,marginBottom:10,fontSize:12,lineHeight:1.8}}>
           <strong style={{color:"#D0D8E0"}}>1. Passiv beskyttelse</strong> — noget mitigeres automatisk (f.eks. lager der allerede ligger der). Lille effekt.<br/>
           <strong style={{color:"#D0D8E0"}}>2. Operationelle handlinger</strong> — her ligger den store besparelse. I vælger aktivt hvad I gør. Men handlingerne kræver at I har investeret rigtigt. <strong>Låste handlinger viser præcis hvad I mangler og hvorfor.</strong><br/>
-          Jo mere digital modenhed, jo flere handlinger er tilgængelige.
+          
         </div>
         <p style={{margin:0}}><strong style={{color:"#E9C46A"}}>Fase 3 — Bundlinje:</strong> Netto = Omsætning – Driftsomkostninger – Investeringer – Chok-skader. Flest penge vinder.</p>
       </div></div>
