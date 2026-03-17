@@ -403,13 +403,11 @@ export default function App(){
       <div style={{background:"rgba(255,255,255,0.02)",borderRadius:7,padding:"12px 16px",marginBottom:16}}><div style={{fontWeight:600,color:"#D0D8E0",marginBottom:5,fontSize:11}}>Skade per chok</div>{SHOCKS.map((ev,i)=>(<div key={ev.id} style={{display:"flex",justifyContent:"space-between",padding:"4px 0",borderBottom:"1px solid #0E1829",fontSize:11}}><span>{ev.icon+" "}<span style={{color:"#8899AA"}}>{ev.title}</span></span><span style={{fontFamily:"'IBM Plex Mono', monospace",color:(fd[i]||0)<ev.baseDamage*0.3?"#2A9D8F":(fd[i]||0)<ev.baseDamage*0.6?"#E9C46A":"#E63946",fontWeight:500}}>{fmtKr(fd[i]||0)}<span style={{color:"#556677"}}>{" / "+fmtKr(ev.baseDamage)}</span></span></div>))}</div>
       <div style={{background:"rgba(255,255,255,0.03)",borderRadius:7,padding:"14px 16px",marginBottom:16,fontSize:12,color:"#8899AA",lineHeight:1.8}}>
         <div style={{fontWeight:700,color:"#E8EDF2",marginBottom:8}}>{"💬 Refleksion"}</div>
-        <div style={{marginBottom:4}}><strong style={{color:"#D0D8E0"}}>1.</strong> Hvilke handlinger var låst — og hvad ville det koste at åbne dem?</div>
-        <div style={{marginBottom:4}}><strong style={{color:"#D0D8E0"}}>2.</strong> Var der handlinger der slog fejl? Ville I vælge anderledes næste gang?</div>
-        <div style={{marginBottom:4}}><strong style={{color:"#D0D8E0"}}>3.</strong> Ligner NordicParts jeres virksomhed? Hvor halter I mest?</div>
-        <div style={{marginBottom:4}}><strong style={{color:"#D0D8E0"}}>4.</strong> Hvis én produktionssite lukker i morgen, kan en anden tage over?</div>
-        <div style={{marginBottom:4}}><strong style={{color:"#D0D8E0"}}>5.</strong> Behandler I jeres leverandører som partnere? Hvad koster forskellen?</div>
-        <div style={{marginBottom:4}}><strong style={{color:"#D0D8E0"}}>6.</strong> Er jeres produkter designet så komponenter kan substitueres?</div>
-        <div><strong style={{color:"#D0D8E0"}}>7.</strong> 1 mio. ekstra — ét tiltag — hvad giver mest?</div>
+        <div style={{marginBottom:4}}><strong style={{color:"#D0D8E0"}}>2.</strong> Hvad var det mest interessante ved øvelsen?</div>
+        <div style={{marginBottom:4}}><strong style={{color:"#D0D8E0"}}>3.</strong> Hvilke udfrodringer har I hos jer i forhold til robusthed og resiliens?</div>
+        <div style={{marginBottom:4}}><strong style={{color:"#D0D8E0"}}>4.</strong> Hvad er de vigtigste læringer i din organisation i forhold til at skabe robusthed og resiliens?</div>
+        <div style={{marginBottom:4}}><strong style={{color:"#D0D8E0"}}>5.</strong> Hvordan samarbejder i med kunder og leverandører om at skabe øget robusthed og resiliens?</div>
+        <div><strong style={{color:"#D0D8E0"}}>7.</strong> 1 mio. ekstra — ét tiltag — hvad ville du investere i, i din egen virksomhed?</div>
       </div>
       <div style={{textAlign:"center",paddingBottom:20}}><button onClick={reset} style={{background:"transparent",color:"#8899AA",border:"1px solid #2A3654",borderRadius:7,padding:"10px 26px",fontSize:12,cursor:"pointer"}}>{"↻ Nyt spil"}</button></div>
     </div>)}
