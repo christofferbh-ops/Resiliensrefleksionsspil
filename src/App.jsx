@@ -4,12 +4,12 @@ const BUDGET = 10000000, REVENUE = 24000000;
 
 const CATS = [
   { id:"network",title:"Netværksstruktur",icon:"🌐",
-    description:"Hvor sourcer I strategiske komponeter fra — og hvor afhængige er I af én region?",
+    description:"Hvor sourcer I fra — og hvor afhængige er I af én region?",
     source:"WEF/Kearney 2026 · OECD Resilience Review 2025",
     options:[
-      {id:"global_single",label:"Global single-source (Kina)",cost:0,eff:100,passive:0,desc:"Langt udelukkende single source fra Kina. Laveste pris, 100% afhængig.",costNote:"Ingen meromkostning. Men lav grad af robusthed overfor forstyrrelser."},
+      {id:"global_single",label:"Global single-source (Kina)",cost:0,eff:100,passive:0,desc:"Én leverandør i Kina. Laveste pris, 100% afhængig.",costNote:"Ingen meromkostning. Men al forsyning forsvinder ved ét nedbrud."},
       {id:"china_plus_one",label:"China + 1 (f.eks. Vietnam)",cost:600000,eff:91,passive:4,desc:"Primær i Kina + sekundær i Vietnam. Billigere end fuld diversificering, men Vietnam har strukturelle lofter: arbejdskraftmangel (Bac Ninh mangler 330.000+ arbejdere), begrænset industriland og kapacitet der ikke matcher Kinas skala.",costNote:"600k + 2,2 mio./år (9%). Backup — men backup'en har begrænsninger."},
-      {id:"global_dual",label:"Global dual-source (spredt)",cost:1000000,eff:86,passive:7,desc:"To leverandører i forskellige regioner (f.eks. Tyrkiet + Sydøstasien).",costNote:"1 mio. + 3,4 mio./år (14%). Reel diversificering — ikke afhængig af én regions kapacitet."},
+      {id:"global_dual",label:"Global dual-source (spredt)",cost:1000000,eff:86,passive:7,desc:"To leverandører i forskellige regioner (f.eks. Tyrkiet + Sydøstasien). Ægte diversificering.",costNote:"1 mio. + 3,4 mio./år (14%). Reel diversificering — ikke afhængig af én regions kapacitet."},
       {id:"regional",label:"Regionalt netværk (nearshore)",cost:1800000,eff:75,passive:11,desc:"Leverandører i Europa. Kortere leadtimes, toldvenligt, dyrere enheder.",costNote:"1,8 mio. + 6 mio./år (25%). Næsten upåvirket af Asien-disruptions."},
       {id:"local",label:"Lokalt netværk hvor muligt",cost:2800000,eff:65,passive:15,desc:"Dansk/nordisk sourcing + produktion hvor muligt. Ikke alt kan sources lokalt, men det der kan, er tæt på og kontrollerbart.",costNote:"2,8 mio. + 8,4 mio./år (35%). Mest resilient, men dyrest. Visse specialkomponenter skal stadig importeres."},
     ]},
@@ -37,7 +37,7 @@ const CATS = [
     options:[
       {id:"jit",label:"Just-in-Time (2 uger)",cost:0,eff:100,passive:4,desc:"Minimalt lager. 2 ugers stop = tom hylde.",costNote:"Ingen meromkostning. Men enhver forsinkelse over 2 uger rammer kunderne."},
       {id:"moderate",label:"Moderat buffer (6 uger)",cost:600000,eff:87,passive:13,desc:"6 ugers sikkerhedslager.",costNote:"600k + 3,1 mio./år (13%). 6 ugers pusterum ved disruption."},
-      {id:"strategic",label:"Strategisk lager (12 uger)",cost:1400000,eff:72,passive:22,desc:"12 ugers buffer + kritiske komponenter.",costNote:"1,4 mio. + 6,7 mio./år (28%). Levér normalt i 3 måneder uden forsyning."},
+      {id:"strategic_inv",label:"Strategisk lager (12 uger)",cost:1400000,eff:72,passive:22,desc:"12 ugers buffer + kritiske komponenter.",costNote:"1,4 mio. + 6,7 mio./år (28%). Levér normalt i 3 måneder uden forsyning."},
     ]},
   { id:"flexibility",title:"Produktions-fleksibilitet",icon:"🔄",
     description:"Kan linjer skifte marked/produkt? Har I ledig kapacitet?",
@@ -317,7 +317,7 @@ function ShockCard({ev,sels,onComplete}){
       </div>)})}
 
       {chosen.size>0&&<div style={{fontSize:11,color:"#8899AA",marginTop:6,marginBottom:4}}>{"Samlet ekstra omkostning: "+fmtKr(totalExtraCost)}</div>}
-      <button onClick={doResolve} disabled={chosen.size===0} style={{marginTop:6,background:chosen.size>0?"#2A9D8F":"#2A3654",color:chosen.size>0?"#fff":"#667788",border:"none",borderRadius:7,padding:"11px 24px",fontSize:13,fontWeight:600,cursor:chosen.size>0?"pointer":"not-allowed",width:"100%"}}>{chosen.size>0?"Bekræft — se udfald":"Vælg mindst én handling"}</button>
+      <button onClick={doResolve} style={{marginTop:6,background:"#2A9D8F",color:"#fff",border:"none",borderRadius:7,padding:"11px 24px",fontSize:13,fontWeight:600,cursor:"pointer",width:"100%"}}>{chosen.size>0?"Bekræft — se udfald":"Ingen handlinger tilgængelige — se skade →"}</button>
     </div>):(
     <div style={{padding:"12px",background:"rgba(42,157,143,0.04)",borderRadius:8,border:"1px solid #2A9D8F33"}}>
       <div style={{fontSize:13,fontWeight:700,color:"#E8EDF2",marginBottom:8}}>Udfald:</div>
@@ -403,11 +403,11 @@ export default function App(){
       <div style={{background:"rgba(255,255,255,0.02)",borderRadius:7,padding:"12px 16px",marginBottom:16}}><div style={{fontWeight:600,color:"#D0D8E0",marginBottom:5,fontSize:11}}>Skade per chok</div>{SHOCKS.map((ev,i)=>(<div key={ev.id} style={{display:"flex",justifyContent:"space-between",padding:"4px 0",borderBottom:"1px solid #0E1829",fontSize:11}}><span>{ev.icon+" "}<span style={{color:"#8899AA"}}>{ev.title}</span></span><span style={{fontFamily:"'IBM Plex Mono', monospace",color:(fd[i]||0)<ev.baseDamage*0.3?"#2A9D8F":(fd[i]||0)<ev.baseDamage*0.6?"#E9C46A":"#E63946",fontWeight:500}}>{fmtKr(fd[i]||0)}<span style={{color:"#556677"}}>{" / "+fmtKr(ev.baseDamage)}</span></span></div>))}</div>
       <div style={{background:"rgba(255,255,255,0.03)",borderRadius:7,padding:"14px 16px",marginBottom:16,fontSize:12,color:"#8899AA",lineHeight:1.8}}>
         <div style={{fontWeight:700,color:"#E8EDF2",marginBottom:8}}>{"💬 Refleksion"}</div>
-        <div style={{marginBottom:4}}><strong style={{color:"#D0D8E0"}}>2.</strong> Hvad var det mest interessante ved øvelsen?</div>
-        <div style={{marginBottom:4}}><strong style={{color:"#D0D8E0"}}>3.</strong> Hvilke udfrodringer har I hos jer i forhold til robusthed og resiliens?</div>
-        <div style={{marginBottom:4}}><strong style={{color:"#D0D8E0"}}>4.</strong> Hvad er de vigtigste læringer i din organisation i forhold til at skabe robusthed og resiliens?</div>
-        <div style={{marginBottom:4}}><strong style={{color:"#D0D8E0"}}>5.</strong> Hvordan samarbejder i med kunder og leverandører om at skabe øget robusthed og resiliens?</div>
-        <div><strong style={{color:"#D0D8E0"}}>7.</strong> 1 mio. ekstra — ét tiltag — hvad ville du investere i, i din egen virksomhed?</div>
+        <div style={{marginBottom:4}}><strong style={{color:"#D0D8E0"}}>1.</strong> Hvad var det mest interessante ved øvelsen?</div>
+        <div style={{marginBottom:4}}><strong style={{color:"#D0D8E0"}}>2.</strong> Hvilke udfordringer har I hos jer i forhold til robusthed og resiliens?</div>
+        <div style={{marginBottom:4}}><strong style={{color:"#D0D8E0"}}>3.</strong> Hvad er de vigtigste læringer i din organisation i forhold til at skabe robusthed og resiliens?</div>
+        <div style={{marginBottom:4}}><strong style={{color:"#D0D8E0"}}>4.</strong> Hvordan samarbejder I med kunder og leverandører om at skabe øget robusthed og resiliens?</div>
+        <div><strong style={{color:"#D0D8E0"}}>5.</strong> 1 mio. ekstra — ét tiltag — hvad ville du investere i, i din egen virksomhed?</div>
       </div>
       <div style={{textAlign:"center",paddingBottom:20}}><button onClick={reset} style={{background:"transparent",color:"#8899AA",border:"1px solid #2A3654",borderRadius:7,padding:"10px 26px",fontSize:12,cursor:"pointer"}}>{"↻ Nyt spil"}</button></div>
     </div>)}
