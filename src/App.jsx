@@ -4,12 +4,12 @@ const BUDGET = 10000000, REVENUE = 24000000;
 
 const CATS = [
   { id:"network",title:"Netværksstruktur",icon:"🌐",
-    description:"Hvor sourcer I fra — og hvor afhængige er I af én region?",
+    description:"Hvor sourcer I strategiske komponeter fra — og hvor afhængige er I af én region?",
     source:"WEF/Kearney 2026 · OECD Resilience Review 2025",
     options:[
-      {id:"global_single",label:"Global single-source (Kina)",cost:0,eff:100,passive:0,desc:"Én leverandør i Kina. Laveste pris, 100% afhængig.",costNote:"Ingen meromkostning. Men al forsyning forsvinder ved ét nedbrud."},
+      {id:"global_single",label:"Global single-source (Kina)",cost:0,eff:100,passive:0,desc:"Langt udelukkende single source fra Kina. Laveste pris, 100% afhængig.",costNote:"Ingen meromkostning. Men lav grad af robusthed overfor forstyrrelser."},
       {id:"china_plus_one",label:"China + 1 (f.eks. Vietnam)",cost:600000,eff:91,passive:4,desc:"Primær i Kina + sekundær i Vietnam. Billigere end fuld diversificering, men Vietnam har strukturelle lofter: arbejdskraftmangel (Bac Ninh mangler 330.000+ arbejdere), begrænset industriland og kapacitet der ikke matcher Kinas skala.",costNote:"600k + 2,2 mio./år (9%). Backup — men backup'en har begrænsninger."},
-      {id:"global_dual",label:"Global dual-source (spredt)",cost:1000000,eff:86,passive:7,desc:"To leverandører i forskellige regioner (f.eks. Tyrkiet + Sydøstasien). Ægte diversificering.",costNote:"1 mio. + 3,4 mio./år (14%). Reel diversificering — ikke afhængig af én regions kapacitet."},
+      {id:"global_dual",label:"Global dual-source (spredt)",cost:1000000,eff:86,passive:7,desc:"To leverandører i forskellige regioner (f.eks. Tyrkiet + Sydøstasien).",costNote:"1 mio. + 3,4 mio./år (14%). Reel diversificering — ikke afhængig af én regions kapacitet."},
       {id:"regional",label:"Regionalt netværk (nearshore)",cost:1800000,eff:75,passive:11,desc:"Leverandører i Europa. Kortere leadtimes, toldvenligt, dyrere enheder.",costNote:"1,8 mio. + 6 mio./år (25%). Næsten upåvirket af Asien-disruptions."},
       {id:"local",label:"Lokalt netværk hvor muligt",cost:2800000,eff:65,passive:15,desc:"Dansk/nordisk sourcing + produktion hvor muligt. Ikke alt kan sources lokalt, men det der kan, er tæt på og kontrollerbart.",costNote:"2,8 mio. + 8,4 mio./år (35%). Mest resilient, men dyrest. Visse specialkomponenter skal stadig importeres."},
     ]},
